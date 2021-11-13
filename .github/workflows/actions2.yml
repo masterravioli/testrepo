@@ -23,6 +23,7 @@ jobs:
       uses: CumulusDS/get-yaml-paths-action@v0.1.0
       with:
         file: inputyaml.yml
+        foo: machines.machine1.name
         
     - name: Echo
-      run: echo "The name is ${{ steps.getyml.outputs.machines.machine1.name }}"
+      run: echo "The name is ${{ steps.getyml.outputs.foo }}"
