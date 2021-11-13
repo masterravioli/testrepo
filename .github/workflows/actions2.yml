@@ -18,7 +18,5 @@ jobs:
     - name: Get YML
       uses: CumulusDS/get-yaml-paths-action@v0.1.0
       with:
-        file: testyaml.yml
+        file: inputyaml.yml
         machine1_name: machines.machine1.name
-      run: |
-        echo $machines.machine1.name
