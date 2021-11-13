@@ -1,4 +1,4 @@
-name: Get YML Path
+name: Matrix Loops
 
 on: 
   workflow_dispatch
