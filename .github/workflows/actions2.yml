@@ -24,4 +24,4 @@ jobs:
         file: inputyaml.yml
         
     - name: Echo
-      run: echo "Hello"
+      run: echo ${machines.machine1.name}
