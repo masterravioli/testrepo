@@ -1,0 +1,13 @@
+name: Get YML Path
+
+on: 
+  workflow_dispatch
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        node: [10, 12, 14]
+      steps:
+         - name: Echo
+           run: echo "The version is ${{ matrix.node }}"
