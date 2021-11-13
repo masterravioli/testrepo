@@ -2,6 +2,13 @@ name: Get YML Path
 
 on: 
   workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
 
 jobs:
   getymlpath:
@@ -9,7 +16,7 @@ jobs:
 
     steps:
     - name: Get YML
-      uses: @cumulusds@v0.0.0
+      uses: CumulusDS/get-yaml-paths-action@v0.1.0
       with:
         file: testyaml.yml
         machine1_name: machines.machine1.name
