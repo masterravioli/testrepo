@@ -1,0 +1,7 @@
+machines:
+  machine1:
+    name: M1
+    size: small
+  machine2:
+    name: M2
+    size: large
