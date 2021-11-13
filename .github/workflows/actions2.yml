@@ -18,10 +18,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2.4.0
     
-    - name: Get YML
+    - name: getyml
       uses: CumulusDS/get-yaml-paths-action@v0.1.0
       with:
         file: inputyaml.yml
         
     - name: Echo
-      run: echo ${machines.machine1.name}
+      run: echo ${{ steps.getyml.outputs.machines.machine1.name }}
