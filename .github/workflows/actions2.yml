@@ -25,5 +25,11 @@ jobs:
         file: inputyaml.yml
         foo: machines.machine1.name
         
+    - name: Yamler
+      id: yamler
+      uses: the-coding-turtle/ga-yaml-parser@v0.1
+      with:
+        directory: "config.yaml"
+
     - name: Echo
-      run: echo "The name is ${{ steps.getyml.outputs.foo }}"
+      run: echo "The name is ${{ steps.yamler.outputs.machines_machine1_name }}"
