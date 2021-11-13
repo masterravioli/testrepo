@@ -4,12 +4,11 @@ on:
   workflow_dispatch
 
 jobs:
-  build:
+  job1:
     runs-on: ubuntu-latest
-   
     strategy:
       matrix:
         node: [10, 12, 14]
-      steps:
+    steps:
          - name: Echo
            run: echo "The version is ${{ matrix.node }}"
