@@ -24,4 +24,4 @@ jobs:
         file: inputyaml.yml
         
     - name: Echo
-      run: echo ${{ steps.getyml.outputs.machines.machine1.name }}
+      run: echo ${steps.getyml.outputs.machines.machine1.name}
