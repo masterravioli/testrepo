@@ -6,6 +6,8 @@ jobs:
   converter:
     name: Run converter
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v1
       - uses: fabasoad/yaml-json-xml-converter-action@main
@@ -16,3 +18,12 @@ jobs:
           to: 'json'
       - name: Print yaml2json result
         run: echo "${{ steps.yaml2json.outputs.data }}"
+      - id: set-matrix
+        run: echo "::set-output name=matrix::${{ steps.yaml2json.outputs.data }}"
+  job2:
+    needs: converter
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJSON(needs.converter.outputs.matrix)}}
+    steps:
+      - run: echo "The version is ${{ matrix.machines.machine1.apps }}"
