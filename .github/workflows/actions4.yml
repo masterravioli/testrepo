@@ -10,7 +10,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
-        run: echo "::set-output name=matrix::{\"node\":[A, B, C]}"
+        run: echo "::set-output name=matrix::{\"node\":['A', 'B', 'C']}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
