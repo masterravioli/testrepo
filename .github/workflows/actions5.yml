@@ -7,7 +7,7 @@ jobs:
     name: Run converter
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }} | sed 's/"/\\"/g'
     steps:
       - uses: actions/checkout@v1
       - uses: fabasoad/yaml-json-xml-converter-action@main
@@ -19,7 +19,7 @@ jobs:
       - name: Print yaml2json result
         run: echo "${{ steps.yaml2json.outputs.data }}"
       - id: set-matrix
-        run: echo "::set-output name=matrix::${{ steps.yaml2json.outputs.data }} | sed 's/"/\\"/g'"
+        run: echo "::set-output name=matrix::${{ steps.yaml2json.outputs.data }}"
   job2:
     needs: converter
     runs-on: ubuntu-latest
