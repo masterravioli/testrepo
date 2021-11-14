@@ -2,12 +2,15 @@ name: Converter
 
 on: workflow_dispatch
 
+env:
+  JSON_OUTPUT: "{/"machines/":{/"machine1/":{/"name/":/"M1/",/"size/":/"small/",/"apps/":[/"java/",/"dotnet/"]},/"machine2/":{/"name/":/"M2/",/"size/":/"large/"}}}"
+
 jobs:
   converter:
     name: Run converter
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      matrix: ${{ env.JSON_OUTPUT }}
     steps:
       - uses: actions/checkout@v1
       - uses: fabasoad/yaml-json-xml-converter-action@main
@@ -16,10 +19,6 @@ jobs:
           path: 'inputyaml.yml'
           from: 'yaml'
           to: 'json'
-      - name: Add Environment variable
-        run: echo "json_output=${{ steps.yaml2json.outputs.data }}" >> $GITHUB_ENV
-      - id: set-matrix
-        run: echo "::set-output name=matrix::${{ env.json_output }}"
   job2:
     needs: converter
     runs-on: ubuntu-latest
