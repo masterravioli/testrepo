@@ -7,7 +7,7 @@ jobs:
     name: Run converter
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }} | sed 's/"/\\"/g'
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v1
       - uses: fabasoad/yaml-json-xml-converter-action@main
@@ -16,10 +16,10 @@ jobs:
           path: 'inputyaml.yml'
           from: 'yaml'
           to: 'json'
-      - name: Print yaml2json result
-        run: echo "${{ steps.yaml2json.outputs.data }}"
+      - name: Add Environment variable
+        run: echo "json_output=(${{ steps.yaml2json.outputs.data }} | sed 's/"/\\"/g')" >> $GITHUB_ENV
       - id: set-matrix
-        run: echo "::set-output name=matrix::${{ steps.yaml2json.outputs.data }}"
+        run: echo "::set-output name=matrix::${{ env.json_output }}"
   job2:
     needs: converter
     runs-on: ubuntu-latest
