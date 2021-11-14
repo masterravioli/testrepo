@@ -3,7 +3,7 @@ name: Converter
 on: workflow_dispatch
 
 env:
-  JSON_OUTPUT: "{\"node\":[\"A\", \"B\", \"C\"]}"
+  JSON_OUTPUT: "{\"machines\":{\"machine1\":{\"name\":\"M1\",\"size\":\"small\",\"apps\":[\"java\",\"dotnet\"]},\"machine2\":{\"name\":\"M2\",\"size\":\"large\"}}}"
 
 jobs:
   converter:
@@ -25,4 +25,4 @@ jobs:
     strategy:
       matrix: ${{fromJSON(needs.converter.outputs.matrix)}}
     steps:
-      - run: echo "The version is ${{ matrix.node }}"
+      - run: echo "The version is ${{ matrix.machines.machine1.apps }}"
