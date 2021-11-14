@@ -9,8 +9,6 @@ jobs:
   converter:
     name: Run converter
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ env.JSON_OUTPUT }}
     steps:
       - uses: actions/checkout@v1
       - uses: fabasoad/yaml-json-xml-converter-action@main
@@ -23,6 +21,6 @@ jobs:
     needs: converter
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJSON(needs.converter.outputs.matrix)}}
+      matrix: ${{fromJSON(env.JSON_OUTPUT)}}
     steps:
       - run: echo "The version is ${{ matrix.machines.machine1.apps }}"
