@@ -3,12 +3,14 @@ name: Converter
 on: workflow_dispatch
 
 env:
-  JSONOUTPUT: "{\"node\":[10, 12, 14]}"
+  MATRIX: "{\"node\":[10, 12, 14]}"
 
 jobs:
   converter:
     name: Run converter
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v1
       - uses: fabasoad/yaml-json-xml-converter-action@main
@@ -18,7 +20,7 @@ jobs:
           from: 'yaml'
           to: 'json'
       - id: set-matrix
-        run: echo "::set-output name=matrix::$JSONOUTPUT"
+        run: echo "::set-output name=matrix::$MATRIX"
       
   job2:
     needs: converter
