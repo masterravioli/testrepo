@@ -33,4 +33,4 @@ jobs:
 
     - name: Echo
       shell: pwsh
-      run: Write-Host "The name is ${{ steps.yamler.outputs.machines_machine1_size }}"
+      run: Write-Host "The name is ${{ steps.yamler.outputs.machines_machine1_apps }}"
