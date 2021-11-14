@@ -32,4 +32,4 @@ jobs:
         file: "inputyaml.yml"
 
     - name: Echo
-      run: echo "The name is ${{ steps.yamler.outputs.machines_machine1_apps[1] }}"
+      run: echo "The name is ${{ steps.yamler.outputs.machines_machine1_apps }}"
