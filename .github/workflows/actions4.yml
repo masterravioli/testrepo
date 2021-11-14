@@ -9,12 +9,17 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
+      - name: Yamler
+        id: yamler
+        uses: the-coding-turtle/ga-yaml-parser@v0.1
+        with:
+          file: "inputyaml.yml"
       - id: set-matrix
-        run: echo "::set-output name=matrix::{\"node\":['A', 'B', 'C']}"
+        run: echo "::set-output name=matrix::{\"apps\":['A', 'B', 'C']}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
     steps:
-      - run: echo "The version is ${{ matrix.node }}"
+      - run: echo "The version is ${{ matrix.apps }}"
