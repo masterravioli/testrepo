@@ -3,7 +3,7 @@ name: Converter
 on: workflow_dispatch
 
 env:
-  JSON_OUTPUT: "{\"machines\":{\"machine1\":{\"name\":\"M1\",\"size\":\"small\",\"apps\":[\"java\",\"dotnet\"]},\"machine2\":{\"name\":\"M2\",\"size\":\"large\"}}}"
+  JSONOUTPUT: "{\"machines\":{\"machine1\":{\"name\":\"M1\",\"size\":\"small\",\"apps\":[\"java\",\"dotnet\"]},\"machine2\":{\"name\":\"M2\",\"size\":\"large\"}}}"
 
 jobs:
   converter:
@@ -17,10 +17,13 @@ jobs:
           path: 'inputyaml.yml'
           from: 'yaml'
           to: 'json'
+      - id: set-matrix
+        run: echo "::set-output name=matrix::$JSONOUTPUT"
+      
   job2:
     needs: converter
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJSON(env.JSON_OUTPUT)}}
+      matrix: ${{fromJSON(needs.converter.outputs.matrix))}}
     steps:
       - run: echo "The version is ${{ matrix.machines.machine1.apps }}"
