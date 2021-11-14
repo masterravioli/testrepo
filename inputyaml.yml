@@ -3,8 +3,8 @@ machines:
     name: M1
     size: small
     apps:
-      java
-      dotnet
+      - java
+      - dotnet
   machine2:
     name: M2
     size: large
