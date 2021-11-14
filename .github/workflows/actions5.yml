@@ -17,7 +17,7 @@ jobs:
           from: 'yaml'
           to: 'json'
       - name: Add Environment variable
-        run: echo "json_output=(${{ steps.yaml2json.outputs.data }} | sed 's/"/\\"/g')" >> $GITHUB_ENV
+        run: echo "json_output=(${{ steps.yaml2json.outputs.data }}" | sed 's/"/\\"/g') >> $GITHUB_ENV
       - id: set-matrix
         run: echo "::set-output name=matrix::${{ env.json_output }}"
   job2:
