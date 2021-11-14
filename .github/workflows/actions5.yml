@@ -15,4 +15,4 @@ jobs:
           from: 'yaml'
           to: 'json'
       - name: Print yaml2json result
-        run: echo "${{ steps.yaml2json.outputs.data.machines }}"
+        run: echo "${{ steps.yaml2json.outputs.data }}"
