@@ -32,4 +32,5 @@ jobs:
         file: "inputyaml.yml"
 
     - name: Echo
-      run: echo "The name is ${{ steps.yamler.outputs.machines_machine1_apps }}"
+      shell: pwsh
+      run: Write-Host "The name is ${{ steps.yamler.outputs.machines_machine1_size }}"
