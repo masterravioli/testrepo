@@ -19,7 +19,7 @@ jobs:
       - name: Print yaml2json result
         run: echo "${{ steps.yaml2json.outputs.data }}"
       - id: set-matrix
-        run: echo "::set-output name=matrix::${{ steps.yaml2json.outputs.data }}"
+        run: echo "::set-output name=matrix::${{ steps.yaml2json.outputs.data }} | sed 's/"/\\"/g'"
   job2:
     needs: converter
     runs-on: ubuntu-latest
