@@ -24,6 +24,6 @@ jobs:
     needs: converter
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJSON(needs.converter.outputs.matrix))}}
+      matrix: ${{fromJSON(needs.converter.outputs.matrix)}}
     steps:
       - run: echo "The version is ${{ matrix.node }}"
