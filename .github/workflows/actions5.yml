@@ -3,7 +3,7 @@ name: Converter
 on: workflow_dispatch
 
 env:
-  MATRIX: "{\"machines\":{\"machine1\":{\"name\":\"M1\",\"size\":\"small\",\"apps\":[\"java\",\"dotnet\"]},\"machine2\":{\"name\":\"M2\",\"size\":\"large\"}}}"
+  MATRIX: "{\"node\":[17, 24, 11]}"
 
 jobs:
   converter:
@@ -26,6 +26,9 @@ jobs:
     needs: converter
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 1
       matrix: ${{fromJSON(needs.converter.outputs.matrix)}}
     steps:
-      - run: echo "The version is ${{ matrix.machines.machine1.apps }}"
+      - run: | 
+               sleep 10
+               echo "The version is ${{ matrix.node }}"
