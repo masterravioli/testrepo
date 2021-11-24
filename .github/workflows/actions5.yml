@@ -30,6 +30,13 @@ jobs:
       matrix: ${{fromJSON(needs.converter.outputs.matrix)}}
     steps:
       - run: | 
-               sleep 10
+               sleep 5
                echo "The version is ${{ matrix.node }}"
                echo "The job id is ${{ github.job }}"
+
+  job3:
+    needs: [converter, job2]
+    runs-on: ubuntu-latest
+    steps:
+      - run: | 
+               echo "Hello, I am job3!"
