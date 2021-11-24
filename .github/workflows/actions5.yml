@@ -36,7 +36,7 @@ jobs:
 
   job3:
     needs: [converter, job2]
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - run: | 
                exit 1
