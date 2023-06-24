@@ -1,0 +1,34 @@
+name: Read Config Keys
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  read-config:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Read Config Keys
+        run: |
+          # Retrieve the JSON data from the configuration variable
+          data=$(echo "$MYDATA" | jq -r '.')
+
+          # Extract specific keys and subkeys from the JSON data
+          name=$(echo "$data" | jq -r '.name')
+          age=$(echo "$data" | jq -r '.age')
+          email=$(echo "$data" | jq -r '.email')
+          street=$(echo "$data" | jq -r '.address.street')
+          city=$(echo "$data" | jq -r '.address.city')
+          programming_languages=$(echo "$data" | jq -r '.skills[].programming[].language')
+
+          # Print the extracted values
+          echo "Name: $name"
+          echo "Age: $age"
+          echo "Email: $email"
+          echo "Street: $street"
+          echo "City: $city"
+          echo "Programming Languages: $programming_languages"
