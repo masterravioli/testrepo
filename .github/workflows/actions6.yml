@@ -15,17 +15,4 @@ jobs:
           # Retrieve the JSON data from the configuration variable
           - name: Read Config Keys
             run: |
-              name=$(echo "${{ fromJson(vars.MYDATA) }}.name")
-              age=$(echo "${{ fromJson(vars.MYDATA) }}.age")
-              email=$(echo "${{ fromJson(vars.MYDATA) }}.email")
-              street=$(echo "${{ fromJson(vars.MYDATA) }}.address.street")
-              city=$(echo "${{ fromJson(vars.MYDATA) }}.address.city")
-              programming_languages=$(echo "${{ fromJson(vars.MYDATA) }}.skills[].programming[].language")
-
-              # Print the extracted values
-              echo "Name: $name"
-              echo "Age: $age"
-              echo "Email: $email"
-              echo "Street: $street"
-              echo "City: $city"
-              echo "Programming Languages: $programming_languages"
+              echo "${{ fromJson(vars.MYDATA).name }}"
