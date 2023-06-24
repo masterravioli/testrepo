@@ -1,8 +1,6 @@
 name: Read Config Keys
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   read-config:
@@ -15,20 +13,19 @@ jobs:
       - name: Read Config Keys
         run: |
           # Retrieve the JSON data from the configuration variable
-          data=$(echo "$MYDATA" | jq -r '.')
+          - name: Read Config Keys
+            run: |
+              name=$(echo "${{ fromJson(vars.MYDATA) }}.name")
+              age=$(echo "${{ fromJson(vars.MYDATA) }}.age")
+              email=$(echo "${{ fromJson(vars.MYDATA) }}.email")
+              street=$(echo "${{ fromJson(vars.MYDATA) }}.address.street")
+              city=$(echo "${{ fromJson(vars.MYDATA) }}.address.city")
+              programming_languages=$(echo "${{ fromJson(vars.MYDATA) }}.skills[].programming[].language")
 
-          # Extract specific keys and subkeys from the JSON data
-          name=$(echo "$data" | jq -r '.name')
-          age=$(echo "$data" | jq -r '.age')
-          email=$(echo "$data" | jq -r '.email')
-          street=$(echo "$data" | jq -r '.address.street')
-          city=$(echo "$data" | jq -r '.address.city')
-          programming_languages=$(echo "$data" | jq -r '.skills[].programming[].language')
-
-          # Print the extracted values
-          echo "Name: $name"
-          echo "Age: $age"
-          echo "Email: $email"
-          echo "Street: $street"
-          echo "City: $city"
-          echo "Programming Languages: $programming_languages"
+              # Print the extracted values
+              echo "Name: $name"
+              echo "Age: $age"
+              echo "Email: $email"
+              echo "Street: $street"
+              echo "City: $city"
+              echo "Programming Languages: $programming_languages"
