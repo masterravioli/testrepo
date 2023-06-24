@@ -13,4 +13,4 @@ jobs:
       - name: Read Config Keys
         run: |
           # Retrieve the JSON data from the configuration variable
-          echo "${{ fromJson(vars.MYDATA).name }}"
+          echo "${{ fromJson(vars.MYDATA2).name }}"
